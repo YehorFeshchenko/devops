@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+
+#/ command: feshchenko:yehor: "shows my name"
+#/ usage: rerun feshchenko:yehor [options]
+#/ rerun-variables: RERUN, RERUN_VERSION, RERUN_MODULES, RERUN_MODULE_DIR
+#/ option-variables: 
+
+. "$RERUN_MODULE_DIR/lib/functions.sh" "yehor" || { 
+  echo >&2 "Failed loading function library." ; exit 1 ; 
+}
+
+set -o errexit -o nounset -o pipefail
+
+rerun_options_parse "$@"
+
+# Command implementation
+# ----------------------
+
+# - - -
+# Put the command implementation here.
+# - - -
+
+
+for ENV_NAME in $(printenv | sed 's;=.*;;') 
+do 
+  echo "$(tput setaf 1) $ENV_NAME $(tput setaf 2) $(printenv $ENV_NAME)" 
+done
+
+
+# Done. Exit with last command exit status.
+exit $?
+
